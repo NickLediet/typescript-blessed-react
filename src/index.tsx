@@ -13,7 +13,7 @@ class App extends Component<any, any> {
         super(props)
 
         this.state = {
-            barData: [5, 10]
+            barData: [0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
     }
 
@@ -24,7 +24,7 @@ class App extends Component<any, any> {
 
     timer() {
         this.setState({
-            barData: this.state.barData.map((bd: number) => bd + 2)
+            barData: this.state.barData.map((bd: number, i: number) => bd + Math.floor(Math.random() * 20))
         })
 
         screen.render()
@@ -43,9 +43,9 @@ class App extends Component<any, any> {
                     barWidth={4}
                     barSpacing={6}
                     xOffset={0}
-                    maxHeight={9}
+                    maxHeight={Math.max(...this.state.barData)}
                     data={{
-                        titles: ['bar1', 'bar2'],
+                        titles: this.state.barData.map((d:number,i:number) => `bar${i}`),
                         data: this.state.barData
                     }}
                 />
